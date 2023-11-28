@@ -1,13 +1,17 @@
+// abstract class for contract
 public abstract class Contract {
 
     public abstract double getMonthlyIncome();
 }
+//permanent class extends from contract
 class Permanent extends Contract{
+    //attributes for permanent class
     private int days_worked;
     private double monthly_salary;
     private int no_of_children;
     private boolean civil_status;
     private double monthly_premium;
+    //constructors
     public Permanent(int no_of_children,boolean civil_status,double monthly_salary,double monthly_premium,int days_worked){
         this.days_worked=days_worked;
         this.monthly_salary=monthly_salary;
@@ -15,6 +19,7 @@ class Permanent extends Contract{
         this.civil_status=civil_status;
         this.monthly_premium=monthly_premium;
     }
+    //setter and getter methods
 
     public void setDays_worked(int days_worked) {
         this.days_worked = days_worked;
@@ -65,15 +70,18 @@ class Permanent extends Contract{
         }
     }
 }
+//class temporary derived from contract class
 class Temporary extends Contract{
+    // temporary contract attributes
     private int hours_worked;
     private double hourly_wage;
 
+    //constructor 
     public Temporary(double hourly_wage,int hours_worked){
         this.hours_worked=hours_worked;
         this.hourly_wage=hourly_wage;
     }
-
+    //getter and setter methods
     public void setHourly_wage(double hourly_wage) {
         this.hourly_wage = hourly_wage;
     }
