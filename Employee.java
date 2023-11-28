@@ -62,3 +62,35 @@ public class Employee {
     }
 }
 
+class Manager extends Employee{
+    private int num_of_travelled_days;
+    private  int num_of_clients;
+
+    public Manager(String name,int birth_year,int num_of_clients,int num_of_travelled_days,double occupation_rate){
+        super(name,birth_year,occupation_rate);
+        this.num_of_travelled_days=num_of_travelled_days;
+        this.num_of_clients=num_of_clients;
+    }
+    public Manager(String name,int birth_year,int num_of_clients,int num_of_travelled_days){
+        super(name,birth_year);
+        this.num_of_travelled_days=num_of_travelled_days;
+        this.num_of_clients=num_of_clients;
+    }
+
+    public void setNum_of_clients(int num_of_clients) {
+        this.num_of_clients = num_of_clients;
+    }
+
+    public void setNum_of_travelled_days(int num_of_travelled_days) {
+        this.num_of_travelled_days = num_of_travelled_days;
+    }
+
+    public int getNum_of_clients() {
+        return this.num_of_clients;
+    }
+
+    public int getNum_of_travelled_days() {
+        return this.num_of_travelled_days;
+    }
+
+}
