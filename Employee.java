@@ -1,6 +1,8 @@
 
 import java.time.*;
+//abstract employee class
 public abstract class Employee {
+    //employee fields
     private final String name;
     private int birth_year;
     private double monthly_income;
@@ -8,19 +10,13 @@ public abstract class Employee {
     private Vehicle vehicle;
     private Contract contract;
 
+    //constant values for the fields
     static final int GAIN_FACTOR_CLIENT = 500;
     static final int GAIN_FACTOR_TRAVEL = 100;
     static final int GAIN_FACTOR_ERROR = 10;
     static final int GAIN_FACTOR_PROJECTS = 200;
 
-
-
-    public int age(){
-        int present_year = Year.now().getValue();
-        return (present_year-birth_year);
-    }
-
-
+    // employee class constructors
     public Employee(String name,int birth_year){
         this.name=name;
         this.birth_year=birth_year;
@@ -65,6 +61,12 @@ public abstract class Employee {
         display();
 
     }
+     // To calculate age
+    public int age(){
+        int present_year = Year.now().getValue();
+        return (present_year-birth_year);
+    }
+    // function to display employee info and vehicle info
     public void empinfo(){
         System.out.println("-------------------------");
         System.out.println("Name: "+getName()+", a "+getClass().getSimpleName());
@@ -92,7 +94,7 @@ public abstract class Employee {
     public void display(){
         System.out.println("We have a new employee:"+this.getName()+", a "+this.getClass().getSimpleName());
     }
-
+    //getter and setter methods
     public double getMonthly_income() {
         return monthly_income;
     }
@@ -136,6 +138,7 @@ public abstract class Employee {
 
     public abstract void getEmployeeInfo();
 
+    // to assign contract to the employee
     public void signContract(Contract contract){
 
         this.contract=contract;
@@ -145,15 +148,17 @@ public abstract class Employee {
     public Contract getContract() {
         return contract;
     }
-
+    // abstract method for contractinfo that will be implemented in below classes
     public abstract void contractInfo();
 
 
 }
+// manager class derived from employee
 class Manager extends Employee{
+    //manager fields
     private int num_of_travelled_days;
     private  int num_of_clients;
-
+    // constructors
     public Manager(String name,int birth_year,int num_of_clients,int num_of_travelled_days){
         super(name,birth_year);
         this.num_of_travelled_days=num_of_travelled_days;
@@ -175,6 +180,7 @@ class Manager extends Employee{
         this.num_of_clients=num_of_clients;
     }
 
+    //setter and getter methods
     public void setNum_of_clients(int num_of_clients) {
         this.num_of_clients = num_of_clients;
     }
@@ -190,6 +196,7 @@ class Manager extends Employee{
     public int getNum_of_travelled_days() {
         return this.num_of_travelled_days;
     }
+    // methods to calculate annual income 
     public double annualIncome(){
         return (((GAIN_FACTOR_TRAVEL*getNum_of_travelled_days())+(GAIN_FACTOR_CLIENT*getNum_of_clients()))+(getOccupation_rate()/100)
                 *getMonthly_income()*12);
@@ -226,11 +233,12 @@ class Manager extends Employee{
 
     }
 }
-
+// class tester derived from employee
 class Tester extends Employee{
+    // tester fields
     private int num_of_bugs;
 
-
+    //constructors
     public Tester(String name, int birth_year,int num_of_bugs,Vehicle vehicle){
         super(name, birth_year,vehicle);
         this.num_of_bugs=num_of_bugs;
@@ -244,6 +252,7 @@ class Tester extends Employee{
         this.num_of_bugs=num_of_bugs;
     }
 
+    //setter and getter functions
     public void setNum_of_bugs(int num_of_bugs) {
         this.num_of_bugs = num_of_bugs;
     }
@@ -286,10 +295,11 @@ class Tester extends Employee{
 
     }
 }
-
+//class programmer derived from employee
 class Programmer extends Employee{
+    //programmer fields
     private int num_of_projects;
-
+    //constructors
     public Programmer(String name, int birth_year,int num_of_projects){
         super(name, birth_year);
         this.num_of_projects=num_of_projects;
@@ -307,6 +317,7 @@ class Programmer extends Employee{
         this.num_of_projects=num_of_projects;
     }
 
+    //setter and getter methods
     public void setNum_of_projects(int num_of_projects) {
         this.num_of_projects = num_of_projects;
     }
