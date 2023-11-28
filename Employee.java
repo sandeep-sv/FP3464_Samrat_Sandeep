@@ -94,3 +94,36 @@ class Manager extends Employee{
     }
 
 }
+
+class Tester extends Employee{
+    private int num_of_bugs;
+    public Tester(String name, int birth_year, int num_of_bugs,double occupation_rate) {
+        super(name, birth_year,occupation_rate);
+        this.num_of_bugs=num_of_bugs;
+    }
+    public void setNum_of_bugs(int num_of_bugs) {
+        this.num_of_bugs = num_of_bugs;
+    }
+
+    public int getNum_of_bugs() {
+        return num_of_bugs;
+    }
+}
+
+class Programmer extends Employee{
+    private int num_of_projects;
+    public Programmer(String name, int birth_year, int num_of_projects,double occupation_rate) {
+        super(name, birth_year,occupation_rate);
+        this.num_of_projects=num_of_projects;
+    }
+    public Programmer(String name, int birth_year, int num_of_projects) {
+        super(name, birth_year);
+        this.num_of_projects=num_of_projects;
+    }
+    public void setNum_of_projects(int num_of_projects) {
+        this.num_of_projects = num_of_projects;
+    }
+    public int getNum_of_projects() {
+        return num_of_projects;
+    }
+}
