@@ -103,5 +103,6 @@ public class Management {
             employee.contractInfo();        }
         System.out.println("-------------------------");
 
+    
     }
 }
