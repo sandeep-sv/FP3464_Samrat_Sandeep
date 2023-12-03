@@ -35,7 +35,7 @@ public class Management {
     // Manager: name, birthYear, nbClients, nbTravelDays, rate, employeeVehicle
     // Programmer: name, birthYear, nbProjects, rate, employeeVehicle
     // Tester: name, birthYear, nbBugs, rate, employeeVehicle
-   void hireTest2() {
+    void hireTest2() {
         employees.clear();
         employees.add(new Manager("Serge", 1985, 30, 4, vt1));
         employees.add(new Manager("Cindy", 1974, 20, 6, 80, vt2));
@@ -44,7 +44,8 @@ public class Management {
         employees.add(new Programmer("Matt", 1981, 5, 110, vt4));
         employees.add(new Programmer("Sarah", 1986, 3, vt3));
         for (Employee employee : employees) {
-            employee.getEmployeeInfo();
+            System.out.println("-------------------------");
+            System.out.println(employee);
             System.out.println("-------------------------");
         }
     }
@@ -81,7 +82,8 @@ public class Management {
         employees.add(Sarah);
 
         for (Employee employee : employees) {
-            employee.getEmployeeInfo();
+            System.out.println("-------------------------");
+            System.out.println(employee);
             System.out.println("-------------------------");
         }
 
@@ -89,7 +91,8 @@ public class Management {
         System.out.println("Contracts: ");
         System.out.println("-------------------------");
         for (Employee employee : employees) {
-            employee.contractInfo();        }
+            System.out.print(employee.contractInfo());
+        }
         System.out.println("-------------------------");
 
         // updating Matt's contract
@@ -100,9 +103,9 @@ public class Management {
         System.out.println("Contracts: ");
         System.out.println("-------------------------");
         for (Employee employee : employees) {
-            employee.contractInfo();        }
+            System.out.print(employee.contractInfo());
+        }
         System.out.println("-------------------------");
 
-    
     }
 }
