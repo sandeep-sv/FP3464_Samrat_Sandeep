@@ -1,8 +1,8 @@
 
 import java.time.*;
-//abstract employee class
+// abstract employee class
 public abstract class Employee {
-    //employee fields
+// employee class fields
     private final String name;
     private int birth_year;
     private double monthly_income;
@@ -10,13 +10,19 @@ public abstract class Employee {
     private Vehicle vehicle;
     private Contract contract;
 
-    //constant values for the fields
     static final int GAIN_FACTOR_CLIENT = 500;
     static final int GAIN_FACTOR_TRAVEL = 100;
     static final int GAIN_FACTOR_ERROR = 10;
     static final int GAIN_FACTOR_PROJECTS = 200;
 
-    // employee class constructors
+
+
+    public int age(){
+        int present_year = Year.now().getValue();
+        return (present_year-birth_year);
+    }
+
+    //constructors
     public Employee(String name,int birth_year){
         this.name=name;
         this.birth_year=birth_year;
@@ -59,41 +65,12 @@ public abstract class Employee {
         }
         this.vehicle=vehicle;
         display();
+    }
 
-    }
-     // To calculate age
-    public int age(){
-        int present_year = Year.now().getValue();
-        return (present_year-birth_year);
-    }
-    // function to display employee info and vehicle info
-    public void empinfo(){
-        System.out.println("-------------------------");
-        System.out.println("Name: "+getName()+", a "+getClass().getSimpleName());
-        System.out.println("Age:"+age());
-        System.out.println("Employee Has a "+getVehicle().getClass().getSimpleName());
-        System.out.println("\t- make: "+getVehicle().getMake());
-        System.out.println("\t- plate: "+getVehicle().getPlate());
-        System.out.println("\t- color: "+getVehicle().getColor());
-        System.out.println("\t- category: "+getVehicle().getCategory());
-        if (getVehicle().getClass().getSimpleName().equals("Car")){
-            Car c = (Car)getVehicle();
-            System.out.println("\t- gear type: "+c.getGear());
-            System.out.println("\t- type: "+c.getType());
-        }
-        else{
-            Motorcycle m = (Motorcycle)getVehicle();
-            if(m.getSidecar()){
-                System.out.println("\t- with sidecar");
-            }
-            else{
-                System.out.println("\t- without sidecar");
-            }
-        }
-    }
     public void display(){
         System.out.println("We have a new employee:"+this.getName()+", a "+this.getClass().getSimpleName());
     }
+
     //getter and setter methods
     public double getMonthly_income() {
         return monthly_income;
@@ -136,9 +113,7 @@ public abstract class Employee {
         return vehicle;
     }
 
-    public abstract void getEmployeeInfo();
 
-    // to assign contract to the employee
     public void signContract(Contract contract){
 
         this.contract=contract;
@@ -148,17 +123,15 @@ public abstract class Employee {
     public Contract getContract() {
         return contract;
     }
-    // abstract method for contractinfo that will be implemented in below classes
+
     public abstract void contractInfo();
 
-
 }
-// manager class derived from employee
+// class manager derived from employee
 class Manager extends Employee{
-    //manager fields
     private int num_of_travelled_days;
     private  int num_of_clients;
-    // constructors
+
     public Manager(String name,int birth_year,int num_of_clients,int num_of_travelled_days){
         super(name,birth_year);
         this.num_of_travelled_days=num_of_travelled_days;
@@ -180,7 +153,6 @@ class Manager extends Employee{
         this.num_of_clients=num_of_clients;
     }
 
-    //setter and getter methods
     public void setNum_of_clients(int num_of_clients) {
         this.num_of_clients = num_of_clients;
     }
@@ -196,16 +168,37 @@ class Manager extends Employee{
     public int getNum_of_travelled_days() {
         return this.num_of_travelled_days;
     }
-    // methods to calculate annual income 
     public double annualIncome(){
         return (((GAIN_FACTOR_TRAVEL*getNum_of_travelled_days())+(GAIN_FACTOR_CLIENT*getNum_of_clients()))+(getOccupation_rate()/100)
                 *getMonthly_income()*12);
     }
-    public void getEmployeeInfo(){
-        empinfo();
-        System.out.println(getName()+" has an Occupation rate: "+getOccupation_rate()+"% He/She travelled "
-                +getNum_of_travelled_days()+" days and has brought "+getNum_of_clients()+" new clients.");
-        System.out.println("His/Her Estimated annual income is: "+annualIncome());
+
+
+
+    @Override
+    public String toString() {
+
+        String output =
+                "Name: " + getName() + ", a " + getClass().getSimpleName() + "\n" +
+                "Age: " + age() + "\n" +
+                "Employee Has a " + getVehicle().getClass().getSimpleName() + "\n" +
+                "\t- make: " + getVehicle().getMake() + "\n" +
+                "\t- plate: " + getVehicle().getPlate() + "\n" +
+                "\t- color: " + getVehicle().getColor() + "\n" +
+                "\t- category: " + getVehicle().getCategory() + "\n";
+
+        if (getVehicle().getClass().getSimpleName().equals("Car")) {
+            Car c = (Car) getVehicle();
+            output += "\t- gear type: " + c.getGear() + "\n";
+            output += "\t- type: " + c.getType() + "\n";
+        } else {
+            Motorcycle m = (Motorcycle) getVehicle();
+            output += m.getSidecar() ? "\t- with sidecar\n" : "\t- without sidecar\n";
+        }
+        String output2 = getName() + " has an Occupation rate: " + getOccupation_rate() + "% He/She travelled " +
+                getNum_of_travelled_days() + " days and has brought " + getNum_of_clients() + " new clients.\n" +
+                "His/Her Estimated annual income is: " + annualIncome();
+        return output+output2;
     }
 
     @Override
@@ -233,12 +226,12 @@ class Manager extends Employee{
 
     }
 }
-// class tester derived from employee
+
+//class tester derived from employee
 class Tester extends Employee{
-    // tester fields
     private int num_of_bugs;
 
-    //constructors
+
     public Tester(String name, int birth_year,int num_of_bugs,Vehicle vehicle){
         super(name, birth_year,vehicle);
         this.num_of_bugs=num_of_bugs;
@@ -252,7 +245,6 @@ class Tester extends Employee{
         this.num_of_bugs=num_of_bugs;
     }
 
-    //setter and getter functions
     public void setNum_of_bugs(int num_of_bugs) {
         this.num_of_bugs = num_of_bugs;
     }
@@ -265,12 +257,32 @@ class Tester extends Employee{
         return (((GAIN_FACTOR_ERROR*num_of_bugs))+(getOccupation_rate()/100)*getMonthly_income()*12);
 
     }
-    public void getEmployeeInfo(){
-        empinfo();
-        System.out.println(getName()+" has an Occupation rate: "+getOccupation_rate()+" and corrected "
-                +getNum_of_bugs()+" bugs");
-        System.out.println("His/Her Estimated annual income is: "+annualIncome());
+
+    @Override
+    public String toString() {
+        String output =
+                "Name: " + getName() + ", a " + getClass().getSimpleName() + "\n" +
+                        "Age: " + age() + "\n" +
+                        "Employee Has a " + getVehicle().getClass().getSimpleName() + "\n" +
+                        "\t- make: " + getVehicle().getMake() + "\n" +
+                        "\t- plate: " + getVehicle().getPlate() + "\n" +
+                        "\t- color: " + getVehicle().getColor() + "\n" +
+                        "\t- category: " + getVehicle().getCategory() + "\n";
+
+        if (getVehicle().getClass().getSimpleName().equals("Car")) {
+            Car c = (Car) getVehicle();
+            output += "\t- gear type: " + c.getGear() + "\n";
+            output += "\t- type: " + c.getType() + "\n";
+        } else {
+            Motorcycle m = (Motorcycle) getVehicle();
+            output += m.getSidecar() ? "\t- with sidecar\n" : "\t- without sidecar\n";
+        }
+        String output3 = getName() + " has an Occupation rate: " + getOccupation_rate() + " and corrected " +
+                getNum_of_bugs() + " bugs\n" +
+                "His/Her Estimated annual income is: " + annualIncome();
+        return output+output3;
     }
+
     public void contractInfo() {
         if(getContract().getClass().getSimpleName().equals("Permanent")){
             Permanent p = (Permanent)getContract();
@@ -297,9 +309,8 @@ class Tester extends Employee{
 }
 //class programmer derived from employee
 class Programmer extends Employee{
-    //programmer fields
     private int num_of_projects;
-    //constructors
+
     public Programmer(String name, int birth_year,int num_of_projects){
         super(name, birth_year);
         this.num_of_projects=num_of_projects;
@@ -317,7 +328,6 @@ class Programmer extends Employee{
         this.num_of_projects=num_of_projects;
     }
 
-    //setter and getter methods
     public void setNum_of_projects(int num_of_projects) {
         this.num_of_projects = num_of_projects;
     }
@@ -329,12 +339,34 @@ class Programmer extends Employee{
         return (((GAIN_FACTOR_PROJECTS*num_of_projects))+(getOccupation_rate()/100)*getMonthly_income()*12);
 
     }
-    public void getEmployeeInfo(){
-        empinfo();
-        System.out.println(getName()+" has an Occupation rate: "+getOccupation_rate()
-                +" and completed "+getNum_of_projects()+" projects");
-        System.out.println("His/Her Estimated annual income is: "+annualIncome());
+
+    @Override
+    public String toString() {
+        String output =
+                "Name: " + getName() + ", a " + getClass().getSimpleName() + "\n" +
+                        "Age: " + age() + "\n" +
+                        "Employee Has a " + getVehicle().getClass().getSimpleName() + "\n" +
+                        "\t- make: " + getVehicle().getMake() + "\n" +
+                        "\t- plate: " + getVehicle().getPlate() + "\n" +
+                        "\t- color: " + getVehicle().getColor() + "\n" +
+                        "\t- category: " + getVehicle().getCategory() + "\n";
+
+        if (getVehicle().getClass().getSimpleName().equals("Car")) {
+            Car c = (Car) getVehicle();
+            output += "\t- gear type: " + c.getGear() + "\n";
+            output += "\t- type: " + c.getType() + "\n";
+        } else {
+            Motorcycle m = (Motorcycle) getVehicle();
+            output += m.getSidecar() ? "\t- with sidecar\n" : "\t- without sidecar\n";
+        }
+        String output4 = getName() + " has an Occupation rate: " + getOccupation_rate() +
+                " and completed " + getNum_of_projects() + " projects\n" +
+                "His/Her Estimated annual income is: " + annualIncome();
+
+        return output+output4;
+
     }
+
     public void contractInfo() {
         if(getContract().getClass().getSimpleName().equals("Permanent")){
             Permanent p = (Permanent)getContract();
