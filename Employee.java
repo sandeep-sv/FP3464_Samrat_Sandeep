@@ -124,7 +124,7 @@ public abstract class Employee {
         return contract;
     }
 
-    public abstract void contractInfo();
+    public abstract String contractInfo();
 
 }
 // class manager derived from employee
@@ -202,7 +202,7 @@ class Manager extends Employee{
     }
 
     @Override
-    public void contractInfo() {
+    public String contractInfo() {
         if(getContract().getClass().getSimpleName().equals("Permanent")){
             Permanent p = (Permanent)getContract();
             String cs;
@@ -212,16 +212,16 @@ class Manager extends Employee{
             else{
                 cs="not married";
             }
-            System.out.println(getName()+" is a "+getClass().getSimpleName()+". he/she is "+cs+" and he/she has "
-                    +p.getNo_of_children()+" children");
-            System.out.println("He/She has worked for "+p.getDays_worked()+" days and upon contract his/her monthly salary is "
-                    +p.getMonthly_salary());
+            return getName() + " is a " + getClass().getSimpleName() + ". he/she is " + cs + " and he/she has " +
+                    p.getNo_of_children() + " children\n" +
+                    "He/She has worked for " + p.getDays_worked() + " days and upon contract his/her monthly salary is " +
+                    p.getMonthly_salary();
         }
         else{
             Temporary t = (Temporary) getContract();
-            System.out.println(getName()+" is a "+getClass().getSimpleName()+". he/she is a "
-                    +t.getClass().getSimpleName()+" employee with "+t.getHourly_wage()
-                    +" hourly salary and he has worked for "+t.getHours_worked()+" hours");
+            return getName() + " is a " + getClass().getSimpleName() + ". he/she is a " +
+                    t.getClass().getSimpleName() + " employee with " + t.getHourly_wage() +
+                    " hourly salary and he has worked for " + t.getHours_worked() + " hours";
         }
 
     }
@@ -283,7 +283,7 @@ class Tester extends Employee{
         return output+output3;
     }
 
-    public void contractInfo() {
+    public String contractInfo() {
         if(getContract().getClass().getSimpleName().equals("Permanent")){
             Permanent p = (Permanent)getContract();
             String cs;
@@ -293,16 +293,16 @@ class Tester extends Employee{
             else{
                 cs="not married";
             }
-            System.out.println(getName()+" is a "+getClass().getSimpleName()+". he/she is "+cs+" and he/she has "
-                    +p.getNo_of_children()+" children");
-            System.out.println("He/She has worked for "+p.getDays_worked()+" days and upon contract his/her monthly salary is "
-                    +p.getMonthly_salary());
+            return  getName() + " is a " + getClass().getSimpleName() + ". he/she is " + cs + " and he/she has " +
+                    p.getNo_of_children() + " children\n" +
+                    "He/She has worked for " + p.getDays_worked() + " days and upon contract his/her monthly salary is " +
+                    p.getMonthly_salary();
         }
         else{
             Temporary t = (Temporary) getContract();
-            System.out.println(getName()+" is a "+getClass().getSimpleName()+". he/she is a "
-                    +t.getClass().getSimpleName()+" employee with "+t.getHourly_wage()
-                    +" hourly salary and he has worked for "+t.getHours_worked()+" hours");
+            return getName() + " is a " + getClass().getSimpleName() + ". he/she is a " +
+                    t.getClass().getSimpleName() + " employee with " + t.getHourly_wage() +
+                    " hourly salary and he has worked for " + t.getHours_worked() + " hours";
         }
 
     }
@@ -367,7 +367,7 @@ class Programmer extends Employee{
 
     }
 
-    public void contractInfo() {
+    public String contractInfo() {
         if(getContract().getClass().getSimpleName().equals("Permanent")){
             Permanent p = (Permanent)getContract();
             String cs;
@@ -377,16 +377,17 @@ class Programmer extends Employee{
             else{
                 cs="not married";
             }
-            System.out.println(getName()+" is a "+getClass().getSimpleName()+". he/she is "+cs+" and he/she has "
-                    +p.getNo_of_children()+" children");
-            System.out.println("He/She has worked for "+p.getDays_worked()+" days and upon contract his/her monthly salary is "
-                    +p.getMonthly_salary());
+            return getName() + " is a " + getClass().getSimpleName() + ". he/she is " + cs + " and he/she has " +
+                    p.getNo_of_children() + " children\n" +
+                    "He/She has worked for " + p.getDays_worked() + " days and upon contract his/her monthly salary is " +
+                    p.getMonthly_salary();
+
         }
         else{
             Temporary t = (Temporary) getContract();
-            System.out.println(getName()+" is a "+getClass().getSimpleName()+". he/she is a "
-                    +t.getClass().getSimpleName()+" employee with "+t.getHourly_wage()
-                    +" hourly salary and he has worked for "+t.getHours_worked()+" hours");
+            return getName() + " is a " + getClass().getSimpleName() + ". he/she is a " +
+                    t.getClass().getSimpleName() + " employee with " + t.getHourly_wage() +
+                    " hourly salary and he has worked for " + t.getHours_worked() + " hours";
         }
 
     }

@@ -91,7 +91,7 @@ public class Management {
         System.out.println("Contracts: ");
         System.out.println("-------------------------");
         for (Employee employee : employees) {
-            System.out.print(employee.contractInfo());
+            System.out.println(employee.contractInfo());
         }
         System.out.println("-------------------------");
 
@@ -103,9 +103,8 @@ public class Management {
         System.out.println("Contracts: ");
         System.out.println("-------------------------");
         for (Employee employee : employees) {
-            System.out.print(employee.contractInfo());
+            System.out.println(employee.contractInfo());
         }
         System.out.println("-------------------------");
-
     }
 }
